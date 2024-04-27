@@ -9,7 +9,7 @@ def load_dataset():
                                 'SuicideCount',
                                 'Population', 'GDPPerCapita', 'EmploymentPopulationRatio'])
 
-    data = data.dropna()  # Drop rows with null or NaN values
+    data = data.dropna()  # Drop rows with null or NaN values --- or maybe we should leave them for the last experiment??
     data = data.reset_index(drop=True)
     data_filtered = data[(data['Year'] >= 2010) & (data['Year'] <= 2022)]
 
