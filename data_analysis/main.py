@@ -6,10 +6,11 @@ import data_processing as DataProcessing
 import pca as PCA
 import knn as KNN
 
+
 def run():
     df, features = DataProcessing.load_dataset()
     X = df[features]
-    
+
     Plots.plot_country_distribution(df)
     Plots.plot_region_distribution(df)
     Plots.plot_country_region_distribution(df)
@@ -21,14 +22,14 @@ def run():
     Plots.plot_suicide_counts_over_time_by_region_and_gender(df)
     Plots.plot_total_suicides_over_time_by_region(df)
     Plots.plot_suicide_counts_by_gender(df)
-    
-    #PCA
+
+    # PCA
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     PCA.plot_pca_2d(X_scaled, df)
     PCA.plot_pca_3d(X_scaled, df)
 
-    #KNN
+    # KNN
     target = 'SuicideCount'
     y = df[target]
     knn_model, scaler = KNN.perform_knn(df, y, features)
@@ -38,6 +39,6 @@ def run():
     # predictions = predict_new_data(knn_model, scaler, new_data)
     # print(predictions)
 
- 
+
 if __name__ == "__main__":
     run()

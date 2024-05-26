@@ -1,6 +1,7 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
 def plot_country_distribution(df):
     country_counts = df['CountryName'].value_counts()
     print(country_counts)
@@ -12,16 +13,18 @@ def plot_country_distribution(df):
     plt.ylabel('Countries')
     plt.show()
 
+
 def plot_region_distribution(df):
     region_counts = df['RegionName'].value_counts()
     print(region_counts)
-    
+
     plt.figure(figsize=(10, 8))
     sns.barplot(x=region_counts.values, y=region_counts.index)
     plt.title('Distribution of Regions in the Dataset')
     plt.xlabel('Counts')
     plt.ylabel('Regions')
     plt.show()
+
 
 def plot_country_region_distribution(df):
     country_region_counts = df.groupby('RegionName')['CountryName'].value_counts().unstack(fill_value=0)
@@ -34,14 +37,17 @@ def plot_country_region_distribution(df):
     plt.legend(title='Country')
     plt.show()
 
+
 def plot_correlation_matrix(df):
     correlation_matrix = df[['SuicideCount', 'Population', 'GDPPerCapita', 'EmploymentPopulationRatio']].corr()
     sns.heatmap(correlation_matrix, annot=True)
     plt.show()
 
+
 def plot_descriptive_stats(numeric_df):
     descriptive_stats = numeric_df.describe()
     print(descriptive_stats)
+
 
 def plot_correlation_heatmap(numeric_df):
     correlation_matrix = numeric_df.corr()
@@ -50,15 +56,18 @@ def plot_correlation_heatmap(numeric_df):
     plt.title('Correlation Matrix of Suicide Rates Dataset')
     plt.show()
 
+
 def plot_suicide_counts_over_time_by_region_and_gender(df):
     region_sex_time_suicides = df.groupby(['RegionName', 'Sex', 'Year'])['SuicideCount'].sum().reset_index()
     plt.figure(figsize=(12, 8))
-    sns.lineplot(data=region_sex_time_suicides, x='Year', y='SuicideCount', hue='RegionName', style='Sex', markers=True, dashes=False)
+    sns.lineplot(data=region_sex_time_suicides, x='Year', y='SuicideCount', hue='RegionName', style='Sex', markers=True,
+                 dashes=False)
     plt.title('Suicide Counts Over Time by Region and Gender')
     plt.xlabel('Year')
     plt.ylabel('Total Suicide Count')
     plt.legend(title='Region')
     plt.show()
+
 
 def plot_total_suicides_over_time_by_region(df):
     region_time_suicides = df.groupby(['RegionName', 'Year'])['SuicideCount'].sum().reset_index()
@@ -69,6 +78,7 @@ def plot_total_suicides_over_time_by_region(df):
     plt.ylabel('Total Suicide Count')
     plt.legend(title='Region')
     plt.show()
+
 
 def plot_suicide_counts_by_gender(df):
     for sex in [1, 0]:  # 1 for Male, 0 for Female
